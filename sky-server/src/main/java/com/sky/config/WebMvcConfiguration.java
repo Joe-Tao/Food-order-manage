@@ -48,20 +48,39 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @return
      */
     @Bean
-    public Docket docket() {
+    public Docket docketAdmin() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("Food Order API Documentation")
+                .title("Admin API Documentation")
                 .version("2.0")
-                .description("Food Order API Documentation")
+                .description("Admin接口文档")
                 .build();
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("Admin接口")
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sky.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.admin"))
                 .paths(PathSelectors.any())
                 .build();
-        return docket;
     }
+
+    @Bean
+    public Docket docketUser() {
+        ApiInfo apiInfo = new ApiInfoBuilder()
+                .title("User API Documentation")
+                .version("2.0")
+                .description("User接口文档")
+                .build();
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("User接口")
+                .apiInfo(apiInfo)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.user"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
 
     /**
      * 设置静态资源映射
